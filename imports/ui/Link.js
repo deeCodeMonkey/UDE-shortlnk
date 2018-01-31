@@ -6,7 +6,7 @@ import { Accounts } from 'meteor/accounts-base';
 import LinksList from './LinksList';
 import PrivateHeader from './PrivateHeader';
 import AddLink from './AddLink';
-
+import LinksListFilters from './LinksListFilters';
 
 //presentational component with no props
 export default () => {
@@ -14,12 +14,10 @@ export default () => {
     return (
         <div>
             <PrivateHeader title="Your Links" />
-
+            <LinksListFilters />
             <LinksList />
-
             <AddLink />
-
         </div>
-        );
+    );
 }
 
