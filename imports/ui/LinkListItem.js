@@ -46,6 +46,9 @@ export default class LinkListItem extends Component {
                 <p>{this.props.shortUrl}</p>
                 <p>{this.props.visible.toString()}</p>
                 {this.renderStats()}
+                <a href={this.props.url} target="_blank">
+                    Visit
+                </a>
                 {/*data per Clipboad library*/}
                 <button ref="copy" data-clipboard-text={this.props.shortUrl}>
                     { this.state.copied ? 'Copied' : 'Copy'}

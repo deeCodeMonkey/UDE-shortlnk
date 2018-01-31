@@ -1,9 +1,12 @@
 ﻿import React, { Component } from 'react';
+import Modal from 'react-modal';
 
 export default class AddLink extends Component {
 
     state = {
-        url: ''
+        url: '',
+        isOpen: false,
+        error: ''
     }
 
     onSubmit = (e) => {
@@ -11,15 +14,17 @@ export default class AddLink extends Component {
         //const url = e.target.url.value.trim();
         const { url } = this.state;
         e.preventDefault();
-        if (url) {
+      
             Meteor.call('links.insert', url, (err, res) => {
                 if (!err) {
-                    this.setState({url: ''});
+                    this.handleModalClose();
+                } else {
+                    this.setState({ error: err.reason });
                 }
             });
             //Links.insert({ url, userId: Meteor.userId() });
             //e.target.url.value = '';
-        }
+        
     }
 
     onChange = (e) => {
@@ -28,20 +33,36 @@ export default class AddLink extends Component {
         })
     }
 
+    handleModalClose = () => {
+        this.setState({ isOpen: false, url: '', error: '' });
+    }
+
     render() {
         return (
             <div>
-                <p>Add Link</p>
-                <form onSubmit={this.onSubmit}>
-                    {/*name="url" no longer using uncontrolled input*/}
-                    <input
-                        type="text"
-                        placeholder="URL"
-                        value={this.state.url}
-                        onChange={this.onChange}
-                    />
-                    <button>Add Link</button>
-                </form>
+                <button onClick={() => this.setState({isOpen: true})}>+ Add Link</button>
+                <Modal
+                    isOpen={this.state.isOpen}
+                    contentLabel="Add Link"
+                    onAfterOpen={() => this.refs.url.focus()}
+                    //when clicking on background behind modal
+                    onRequestClose={this.handleModalClose}
+                >
+                    <h1>Add Link</h1>
+                    {this.state.error ? <p>{this.state.error}</p> : undefined}
+                    <form onSubmit={this.onSubmit}>
+                        {/*name="url" no longer using uncontrolled input*/}
+                        <input
+                            type="text"
+                            ref="url"
+                            placeholder="URL"
+                            value={this.state.url}
+                            onChange={this.onChange}
+                        />
+                        <button>Add Link</button>
+                    </form>
+                    <button onClick={this.handleModalClose}>Cancel</button>
+                </Modal>
             </div>
         );
     }
