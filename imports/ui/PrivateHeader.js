@@ -2,19 +2,21 @@
 import PropTypes from 'prop-types';
 
 //stateless functional component (no state or life-cycle method)
-const PrivateHeader = (props) => { 
+const PrivateHeader = (props) => {
 
     //const onLogout = () => {
     //    Accounts.logout();
     //}
-        return(
-            <div>
-                <h1>{props.title}</h1>
-                <button onClick={() =>
+    return (
+        <div className="header">
+            <div className="header__content">
+                <h1 className="header__title">{props.title}</h1>
+                <button className="button button--link-text" onClick={() =>
                     Accounts.logout()
                 }>Logout</button>
             </div>
-        );
+        </div>
+    );
 }
 
 

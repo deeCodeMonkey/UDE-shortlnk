@@ -25,19 +25,21 @@ export default class LogIn extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Short Link</h1>
+            <div className="boxed-view">
+                <div className="boxed-view__box">
+                    <h1>Short Link</h1>
 
-                {this.state.error ? <p>{this.state.error}</p> : undefined}
+                    {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-                <form onSubmit={this.onSubmit} noValidate>
-                    <input type="email" name="email" placeholder="Email" />
-                    <input type="password" name="password" placeholder="Password" />
-                    <button>Log In</button>
-                </form>
+                    <form onSubmit={this.onSubmit} noValidate className="boxed-view__form">
+                        <input type="email" name="email" placeholder="Email" />
+                        <input type="password" name="password" placeholder="Password" />
+                        <button className="button">Log In</button>
+                    </form>
 
-                <Link to="/signup">Need to create an account?</Link>
+                    <Link to="/signup">Need to create an account?</Link>
+                </div>
             </div>
-            );
+        );
     }
 }

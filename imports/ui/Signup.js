@@ -15,10 +15,10 @@ export default class Signup extends Component {
         let password = e.target.password.value.trim();
 
         if (password.length < 6) {
-            return this.setState({error: 'Password must be at least 6 characters long.'});
+            return this.setState({ error: 'Password must be at least 6 characters long.' });
         }
 
-        Accounts.createUser({email, password}, (err) => {
+        Accounts.createUser({ email, password }, (err) => {
             if (err) {
                 this.setState({ error: err.reason });
             } else {
@@ -29,18 +29,20 @@ export default class Signup extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Join Short Link</h1>
+            <div className="boxed-view">
+                <div className="boxed-view__box">
+                    <h1>Join Short Link</h1>
 
-                {this.state.error ? <p>{this.state.error}</p> : undefined}
+                    {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-                <form onSubmit={this.onSubmit} noValidate>
-                    <input type="email" name="email" placeholder="Email" />
-                    <input type="password" name="password" placeholder="Password" />
-                    <button>Create Account</button>
-                </form>
+                    <form onSubmit={this.onSubmit} noValidate className="boxed-view__form">
+                        <input type="email" name="email" placeholder="Email" />
+                        <input type="password" name="password" placeholder="Password" />
+                        <button className="button">Create Account</button>
+                    </form>
 
-                <Link to="/">Already have an account?</Link>
+                    <Link to="/">Already have an account?</Link>
+                </div>
             </div>
         );
     }

@@ -40,17 +40,19 @@ export default class AddLink extends Component {
     render() {
         return (
             <div>
-                <button onClick={() => this.setState({isOpen: true})}>+ Add Link</button>
+                <button className="button" onClick={() => this.setState({ isOpen: true })}>+ Add Link</button>
                 <Modal
                     isOpen={this.state.isOpen}
                     contentLabel="Add Link"
                     onAfterOpen={() => this.refs.url.focus()}
                     //when clicking on background behind modal
                     onRequestClose={this.handleModalClose}
+                    className="boxed-view__box"
+                    overlayClassName="boxed-view boxed-view--modal"
                 >
                     <h1>Add Link</h1>
                     {this.state.error ? <p>{this.state.error}</p> : undefined}
-                    <form onSubmit={this.onSubmit}>
+                    <form onSubmit={this.onSubmit} className="boxed-view__form">
                         {/*name="url" no longer using uncontrolled input*/}
                         <input
                             type="text"
@@ -59,9 +61,10 @@ export default class AddLink extends Component {
                             value={this.state.url}
                             onChange={this.onChange}
                         />
-                        <button>Add Link</button>
+                        <button className="button">Add Link</button>
+                        {/*type=button so that it is not responsiblt for submitting the form*/}
+                        <button type="button" className="button button--secondary" onClick={this.handleModalClose}>Cancel</button>
                     </form>
-                    <button onClick={this.handleModalClose}>Cancel</button>
                 </Modal>
             </div>
         );

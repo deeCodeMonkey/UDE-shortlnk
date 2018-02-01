@@ -1,0 +1,36 @@
+﻿.boxed-view {
+    //flexbox
+    align-items: center;
+    background: $boxed-view-overlay-bg;
+    //flexbox
+    display: flex;
+    //100% of viewport height
+    height: 100vh;
+    //flexbox
+    justify-content: center;
+    width: 100vw;
+}
+
+.boxed-view__box {
+    background: $boxed-view-bg;
+    padding: 2.4rem;
+    text-align: center;
+    width: 24rem;
+}
+
+.boxed-view__form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.boxed-view--modal {
+    background: fade-out($boxed-view-overlay-bg, .3);
+    //to get modal to cover background like it should, once we modify modal with css, modal loses its front facing feature
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
